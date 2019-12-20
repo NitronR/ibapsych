@@ -10,7 +10,7 @@ import com.bhanu.ibapsych.form.field.FormField;
 
 public class Form {
     // key: Field name, value: Field object
-    private Hashtable<String, FormField> fields;
+    private Hashtable<String, FormField<Object>> fields;
     // TODO add non field validators for form if necessary
 
     public Form() {
@@ -31,7 +31,7 @@ public class Form {
         List<FieldError> errors = new ArrayList<>();
 
         for (String fieldName : fields.keySet()) {
-            FormField formField = fields.get(fieldName);
+            FormField<Object> formField = fields.get(fieldName);
 
             List<String> errorMsgs = formField.validate();
 
@@ -44,7 +44,7 @@ public class Form {
         return errors;
     }
 
-    public String getFieldValue(String fieldName) throws FieldDoNotExistException{
+    public Object getFieldValue(String fieldName) throws FieldDoNotExistException{
         // check if field with field name do not exist
         if (!fields.containsKey(fieldName)) {
             throw new FieldDoNotExistException(fieldName);

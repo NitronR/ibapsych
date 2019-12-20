@@ -2,7 +2,7 @@ package com.bhanu.ibapsych.form.validator;
 
 import com.bhanu.ibapsych.form.exception.ValidationException;
 
-public class RequiredValidator implements FieldValidator {
+public class RequiredValidator implements FieldValidator<String> {
     private boolean trim;
 
     public RequiredValidator(boolean trim) {

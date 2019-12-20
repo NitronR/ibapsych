@@ -13,7 +13,7 @@ public class PlayerRegForm extends Form {
         EmailField emailField = new EmailField(email);
 
         // Email field unique validator
-        emailField.addValidator(new FieldValidator() {
+        emailField.addValidator(new FieldValidator<String>() {
             @Override
             public void validate(String value) {
                 // TODO throw error if already exist
@@ -24,7 +24,7 @@ public class PlayerRegForm extends Form {
 
         CharField usernameField = new CharField(username);
 
-        usernameField.addValidator(new FieldValidator() {
+        usernameField.addValidator(new FieldValidator<String>() {
             public void validate(String username) {
                 // TODO throw error if already exist
             }
@@ -36,6 +36,7 @@ public class PlayerRegForm extends Form {
 
     // make player object with clean values
     public Player createPlayer() throws FieldDoNotExistException {
-        return new Player(getFieldValue("email"), getFieldValue("username"), getFieldValue("password"));
+        return new Player((String) getFieldValue("email"), (String) getFieldValue("username"),
+                (String) getFieldValue("password"));
     }
 }

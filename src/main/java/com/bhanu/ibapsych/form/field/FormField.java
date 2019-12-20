@@ -6,16 +6,16 @@ import java.util.List;
 import com.bhanu.ibapsych.form.exception.ValidationException;
 import com.bhanu.ibapsych.form.validator.FieldValidator;
 
-public class FormField {
-    String value;
-    List<FieldValidator> validators;
+public class FormField<T> {
+    T value;
+    List<FieldValidator<T>> validators;
 
-    public FormField(String value) {
+    public FormField(T value) {
         validators = new ArrayList<>();
         this.value = value;
     }
 
-    public void addValidator(FieldValidator validator) {
+    public void addValidator(FieldValidator<T> validator) {
         validators.add(validator);
     }
 
@@ -23,7 +23,7 @@ public class FormField {
     public List<String> validate() {
         List<String> errorMsgs = new ArrayList<>();
 
-        for (FieldValidator validator : validators) {
+        for (FieldValidator<T> validator : validators) {
             try {
                 validator.validate(value);
             } catch (ValidationException e) {
@@ -34,11 +34,11 @@ public class FormField {
         return errorMsgs;
     }
 
-    protected String cleanValue(String value){
+    protected T cleanValue(T value){
         return value;
     }
 
-    public String getValue() {
+    public T getValue() {
         return cleanValue(value);
     }
 }

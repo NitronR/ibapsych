@@ -2,7 +2,7 @@ package com.bhanu.ibapsych.form.field;
 
 import com.bhanu.ibapsych.form.validator.RequiredValidator;
 
-public class CharField extends FormField {
+public class CharField extends FormField<String> {
 
     public CharField(String value) {
         super(value);
